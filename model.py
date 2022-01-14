@@ -1,7 +1,7 @@
 # Importing Libraries
-from nltk.corpus.reader import reviews
+#from nltk.corpus.reader import reviews
 import numpy as np
-from numpy.core.fromnumeric import prod
+#from numpy.core.fromnumeric import prod
 import pandas as pd
 import re, nltk, spacy, string
 import en_core_web_sm

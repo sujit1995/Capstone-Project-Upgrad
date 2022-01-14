@@ -1,4 +1,4 @@
-from itertools import Predicate
+#from itertools import Predicate
 from flask import Flask,render_template,request
 import model 
 app = Flask('__name__')
