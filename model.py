@@ -19,7 +19,7 @@ recommend_matrix = pk.load(open('user_final_rating.pkl','rb'))   # User-User Rec
 
 nlp = en_core_web_sm.load()
 
-product_df = pd.read_csv(r'https://github.com/sujit1995/Capstone-Project-Upgrad/blob/master/sample30.csv')
+product_df = pd.read_csv('https://raw.githubusercontent.com/sujit1995/Capstone-Project-Upgrad/master/sample30.csv?raw=true',sep=",")
 
 def text_preprocessing (text):
     cleaned_text = clean_text(text)
