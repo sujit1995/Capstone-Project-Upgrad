@@ -9,6 +9,7 @@ import pickle as pk
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
 from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier
 from nltk.corpus import stopwords
+nltk.download("stopwords")
 
 # load the pickle files 
 
