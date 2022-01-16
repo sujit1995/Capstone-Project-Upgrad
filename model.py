@@ -1,6 +1,5 @@
 # Importing Libraries
-#from nltk.corpus.reader import reviews
-import numpy as np
+from nltk.corpus.reader import reviews
 #from numpy.core.fromnumeric import prod
 import pandas as pd
 import re, nltk, spacy, string
@@ -60,9 +59,10 @@ def recommend_products(user_name):
 
 def top5_products(df):
     total_product=df.groupby(['name']).agg('count')
-    rec_df = df.groupby(['name','predict_sentiment']).agg('count')
+    rec_df = df.groupby(['name','predicted_sentiment']).agg('count')
     rec_df=rec_df.reset_index()
     merge_df = pd.merge(rec_df,total_product['reviews_text'],on='name')
     merge_df['%percentage'] = (merge_df['reviews_text_x']/merge_df['reviews_text_y'])*100
     merge_df=merge_df.sort_values(ascending=False,by='%percentage')
-    return merge_df[merge_df['predict_sentiment'] ==  1][:5]
+    output_products = pd.DataFrame(merge_df['name'][merge_df['predicted_sentiment'] ==  1][:5])
+    return output_products
