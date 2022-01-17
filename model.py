@@ -18,7 +18,7 @@ tfidf_transformer = pk.load(open('tfidf_transformer.pkl','rb')) # TFIDF Transfor
 model = pk.load(open('model.pkl','rb'))                          # Classification Model
 recommend_matrix = pk.load(open('user_final_rating.pkl','rb'))   # User-User Recommendation System 
 
-nlp = en_core_web_sm.load()
+nlp = spacy.load('en_core_web_sm',disable=['ner','parser'])
 
 product_df = pd.read_csv('https://raw.githubusercontent.com/sujit1995/Capstone-Project-Upgrad/master/sample30.csv?raw=true',sep=",")
 
