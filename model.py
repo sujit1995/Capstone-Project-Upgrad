@@ -18,7 +18,7 @@ tfidf_transformer = pk.load(open('tfidf_transformer.pkl','rb')) # TFIDF Transfor
 model = pk.load(open('model.pkl','rb'))                          # Classification Model
 recommend_matrix = pk.load(open('user_final_rating.pkl','rb'))   # User-User Recommendation System 
 
-nlp = spacy.load('en_core_web_sm',disable=['ner','parser'])
+nlp = spacy.load('en_core_web_sm')
 
 product_df = pd.read_csv('https://raw.githubusercontent.com/sujit1995/Capstone-Project-Upgrad/master/sample30.csv?raw=true',sep=",")
 
@@ -37,8 +37,9 @@ def clean_text(text):
 
 #lemmatizing the text using Spacy library
 def lemmatize(text):
-    sent = nlp(text)
-    sentence = [token.lemma_ for token in sent if token not in set(stopwords.words('english'))]
+    #sent = nlp(text)
+    for doc in nlp.pipe(text, batch_size=32, n_process=3, disable=["parser", "ner"]):
+        sentence = [token.lemma_ for token in doc if token not in set(stopwords.words('english'))]
     return " ".join(sentence)
 
 #predicting the sentiment of the product review comments
