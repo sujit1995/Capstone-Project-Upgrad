@@ -38,7 +38,8 @@ def clean_text(text):
 #lemmatizing the text using Spacy library
 def lemmatize(text):
     #sent = nlp(text)
-    for doc in nlp.pipe(text, batch_size=32, n_process=3, disable=["parser", "ner"]):
+    nlp.pipe()
+    for doc in nlp.pipe(text, batch_size=16, n_process=3, disable=["parser", "ner"]):
         sentence = [token.lemma_ for token in doc if token not in set(stopwords.words('english'))]
     return " ".join(sentence)
 
