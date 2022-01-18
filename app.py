@@ -8,7 +8,7 @@ valid_userid = ['00sab00','1234','zippy','zburt5','joshua','dorothy w','rebecca'
 def view():
     return render_template('index.html')
 
-@app.route('/recommend',methods=['POST','GET'])
+@app.route('/recommend',methods=['POST'])
 def recommend_top5():
     print(request.method)
     user_name = request.form['User Name']

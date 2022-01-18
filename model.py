@@ -13,6 +13,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 nltk.download("stopwords")
 nltk.download('wordnet')
+nltk.download('punkt')
 
 # load the pickle files 
 
