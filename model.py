@@ -12,8 +12,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 nltk.download("stopwords")
-nltk.download('wordnet')
-nltk.download('punkt')
+#nltk.download('wordnet')
+#nltk.download('punkt')
 
 # load the pickle files 
 
@@ -22,7 +22,7 @@ tfidf_transformer = pk.load(open('tfidf_transformer.pkl','rb')) # TFIDF Transfor
 model = pk.load(open('model.pkl','rb'))                          # Classification Model
 recommend_matrix = pk.load(open('user_final_rating.pkl','rb'))   # User-User Recommendation System 
 
-#nlp = spacy.load('en_core_web_sm',disable=['ner','parser'])
+nlp = spacy.load('en_core_web_sm',disable=['ner','parser'])
 
 product_df = pd.read_csv('https://raw.githubusercontent.com/sujit1995/Capstone-Project-Upgrad/master/sample30.csv?raw=true',sep=",")
 
@@ -41,11 +41,11 @@ def clean_text(text):
 
 #lemmatizing the text using Spacy library
 def lemmatize(text):
-    #sent = nlp(text)
-    #sentence = [token.lemma_ for token in sent if token not in set(stopwords.words('english'))]
-    word_list = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
-    sentence = [lemmatizer.lemmatize(token) for token in word_list if token not in set(stopwords.words('english'))]
+    sent = nlp(text)
+    sentence = [token.lemma_ for token in sent if token not in set(stopwords.words('english'))]
+    #word_list = word_tokenize(text)
+    #lemmatizer = WordNetLemmatizer()
+    #sentence = [lemmatizer.lemmatize(token) for token in word_list if token not in set(stopwords.words('english'))]
     return " ".join(sentence)
 
 #predicting the sentiment of the product review comments
