@@ -57,23 +57,24 @@ def model_predict(text):
 
 #Recommend the products based on the sentiment from model
 def recommend_products(user_name):
+    print(user_name)
     product_list = pd.DataFrame(recommend_matrix.loc[user_name].sort_values(ascending=False)[0:20])
     print(product_list.index.tolist())
     product_frame = product_df[product_df.name.isin(product_list.index.tolist())]
     output_df = product_frame[['name','reviews_text']]
-    print('output=',output_df['name'])
+    #print('output=',output_df['name'])
     output_df['lemmatized_text'] = output_df['reviews_text'].apply(text_preprocessing)
     output_df['predicted_sentiment'] = model_predict(output_df['lemmatized_text'])
     return output_df
     
 
 def top5_products(df):
-    total_product=df.groupby(['name']).agg('count')
+    total_product=product_df.groupby(['name']).agg('count')
     rec_df = df.groupby(['name','predicted_sentiment']).agg('count')
     rec_df=rec_df.reset_index()
     merge_df = pd.merge(rec_df,total_product['reviews_text'],on='name')
     merge_df['%percentage'] = (merge_df['reviews_text_x']/merge_df['reviews_text_y'])*100
     merge_df=merge_df.sort_values(ascending=False,by='%percentage')
-    print('merge',merge_df['name'])
+    #print('merge',merge_df['name'])
     output_products = pd.DataFrame(merge_df['name'][merge_df['predicted_sentiment'] ==  1][:5])
     return output_products
