@@ -58,6 +58,7 @@ def model_predict(text):
 #Recommend the products based on the sentiment from model
 def recommend_products(user_name):
     product_list = pd.DataFrame(recommend_matrix.loc[user_name].sort_values(ascending=False)[0:20])
+    print(product_list.index.tolist())
     product_frame = product_df[product_df.name.isin(product_list.index.tolist())]
     output_df = product_frame[['name','reviews_text']]
     print('output=',output_df['name'])
