@@ -69,7 +69,7 @@ def recommend_products(user_name):
     
 
 def top5_products(df):
-    total_product=product_df.groupby(['name']).agg('count')
+    total_product=df.groupby(['name']).agg('count')
     rec_df = df.groupby(['name','predicted_sentiment']).agg('count')
     rec_df=rec_df.reset_index()
     merge_df = pd.merge(rec_df,total_product['reviews_text'],on='name')
