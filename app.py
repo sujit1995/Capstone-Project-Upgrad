@@ -17,7 +17,7 @@ def recommend_top5():
     if  user_name in valid_userid and request.method == 'POST':
         
             top20_products = model.recommend_products(user_name)
-            print(top20_products)
+            print(top20_products.head())
             #print(top20_products.columns)
             get_top5 = model.top5_products(top20_products)
             print(get_top5)
