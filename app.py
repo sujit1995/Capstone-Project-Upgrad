@@ -18,10 +18,7 @@ def recommend_top5():
         
             top20_products = model.recommend_products(user_name)
             print(top20_products.head())
-            #print(top20_products.columns)
             get_top5 = model.top5_products(top20_products)
-            print(get_top5)
-            #print(get_top5.to_html())
             return render_template('index.html',tables=[get_top5.to_html(classes='data',header=False,index=False)],text='Recommended products')
     elif not user_name in  valid_userid:
         return render_template('index.html',text='User not Found')
